@@ -756,34 +756,44 @@ function closeModal(){ document.getElementById('mo').classList.remove('open'); d
 function submitForm(e){
   e.preventDefault();
   const form = e.target;
+  const b = form.querySelector('.bs');
 
-  // Build order summary and inject into hidden field
-  const orderLines = cart.map(item=>
-    item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty
-  ).join(' | ');
-  document.getElementById('order-summary').value = orderLines;
+  // Build order summary string
+  const orderLines = cart.length
+    ? cart.map(item=> item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty).join(' || ')
+    : 'No items added';
 
-  // Submit to Formspree via fetch
+  // Set hidden field value BEFORE creating FormData
+  const orderField = document.getElementById('order-summary');
+  orderField.value = orderLines;
+
+  // Now capture the form — order field is already populated
   const data = new FormData(form);
+
+  // Double-check it's in there
+  data.set('Linen Order', orderLines);
+
   fetch('https://formspree.io/f/mdavgkyy', {
     method: 'POST',
     body: data,
     headers: { 'Accept': 'application/json' }
   }).then(response => {
-    const b = form.querySelector('.bs');
     if(response.ok){
       b.textContent = 'Request sent ✓';
       b.style.background = '#2D6B50';
       b.disabled = true;
       setTimeout(()=>{ closeModal(); cart=[]; renderCart(); }, 2500);
     } else {
+      response.json().then(d => console.log('Formspree error:', d));
       b.textContent = 'Error — please try again';
       b.style.background = '#B82020';
+      b.disabled = false;
     }
-  }).catch(()=>{
-    const b = form.querySelector('.bs');
+  }).catch(err=>{
+    console.log('Fetch error:', err);
     b.textContent = 'Error — please try again';
     b.style.background = '#B82020';
+    b.disabled = false;
   });
 }
 document.getElementById('mo').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
