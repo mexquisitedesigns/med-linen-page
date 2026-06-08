@@ -334,17 +334,19 @@ select.sel:disabled{opacity:.38;cursor:not-allowed}
     <div class="ord-sum">
       <div class="os-hd">Your linen order</div>
       <div id="modal-list"></div>
+      <input type="hidden" id="order-summary" name="Linen Order">
+      <input type="hidden" name="_subject" value="New Linen Rental Request — Morel's Exquisite Designs">
     </div>
-    <form onsubmit="submitForm(event)">
+    <form id="linen-form" action="https://formspree.io/f/mdavgkyy" method="POST">
       <div class="fr">
-        <div class="ff"><label class="fl">Your name</label><input class="fi" type="text" required placeholder="Full name"></div>
-        <div class="ff"><label class="fl">Phone</label><input class="fi" type="tel" required placeholder="(301) 000-0000"></div>
+        <div class="ff"><label class="fl">Your name</label><input class="fi" type="text" name="Name" required placeholder="Full name"></div>
+        <div class="ff"><label class="fl">Phone</label><input class="fi" type="tel" name="Phone" required placeholder="(301) 000-0000"></div>
       </div>
-      <div class="ff"><label class="fl">Email</label><input class="fi" type="email" required placeholder="your@email.com"></div>
+      <div class="ff"><label class="fl">Email</label><input class="fi" type="email" name="Email" required placeholder="your@email.com"></div>
       <div class="fr">
-        <div class="ff"><label class="fl">Event date</label><input class="fi" type="date" required></div>
+        <div class="ff"><label class="fl">Event date</label><input class="fi" type="date" name="Event Date" required></div>
         <div class="ff"><label class="fl">Event type</label>
-          <select class="fi">
+          <select class="fi" name="Event Type">
             <option value="" disabled selected>Select type</option>
             <option>Wedding / Reception</option><option>Corporate event</option>
             <option>Birthday celebration</option><option>Baby / Bridal shower</option>
@@ -352,7 +354,7 @@ select.sel:disabled{opacity:.38;cursor:not-allowed}
           </select>
         </div>
       </div>
-      <div class="ff"><label class="fl">Additional notes</label><input class="fi" type="text" placeholder="Venue, special requests, drop length preference..."></div>
+      <div class="ff"><label class="fl">Additional notes</label><input class="fi" type="text" name="Notes" placeholder="Venue, special requests, drop length preference..."></div>
       <div class="ma">
         <button class="bs" type="submit">Send request →</button>
         <button class="bc" type="button" onclick="closeModal()">Cancel</button>
@@ -754,37 +756,35 @@ function closeModal(){ document.getElementById('mo').classList.remove('open'); d
 function submitForm(e){
   e.preventDefault();
   const form = e.target;
-  const fields = form.querySelectorAll('input,select,textarea');
-  const name  = fields[0]?.value || '';
-  const phone = fields[1]?.value || '';
-  const email = fields[2]?.value || '';
-  const date  = fields[3]?.value || '';
-  const type  = fields[4]?.value || '';
-  const notes = fields[5]?.value || '';
 
+  // Build order summary and inject into hidden field
   const orderLines = cart.map(item=>
-    '  - ' + item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty
-  ).join('%0A');
+    item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty
+  ).join(' | ');
+  document.getElementById('order-summary').value = orderLines;
 
-  const subject = encodeURIComponent('Linen Rental Request - ' + name);
-  const body = 'LINEN RENTAL REQUEST%0A'
-    + '===================%0A'
-    + 'Name: ' + encodeURIComponent(name) + '%0A'
-    + 'Phone: ' + encodeURIComponent(phone) + '%0A'
-    + 'Email: ' + encodeURIComponent(email) + '%0A'
-    + 'Event Date: ' + encodeURIComponent(date) + '%0A'
-    + 'Event Type: ' + encodeURIComponent(type) + '%0A%0A'
-    + 'ORDER:%0A' + orderLines + '%0A%0A'
-    + 'Notes: ' + encodeURIComponent(notes) + '%0A%0A'
-    + 'Submitted via mexquisitedesigns.com%2Flinen';
-
-  window.location.href = 'mailto:info@mexquisitedesigns.com?subject=' + subject + '&body=' + body;
-
-  const b = form.querySelector('.bs');
-  b.textContent = 'Opening email ✓';
-  b.style.background = '#2D6B50';
-  b.disabled = true;
-  setTimeout(()=>{ closeModal(); cart=[]; renderCart(); }, 2000);
+  // Submit to Formspree via fetch
+  const data = new FormData(form);
+  fetch('https://formspree.io/f/mdavgkyy', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    const b = form.querySelector('.bs');
+    if(response.ok){
+      b.textContent = 'Request sent ✓';
+      b.style.background = '#2D6B50';
+      b.disabled = true;
+      setTimeout(()=>{ closeModal(); cart=[]; renderCart(); }, 2500);
+    } else {
+      b.textContent = 'Error — please try again';
+      b.style.background = '#B82020';
+    }
+  }).catch(()=>{
+    const b = form.querySelector('.bs');
+    b.textContent = 'Error — please try again';
+    b.style.background = '#B82020';
+  });
 }
 document.getElementById('mo').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
 
