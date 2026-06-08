@@ -749,28 +749,34 @@ function openModal(){
       <span class="os-qty">×${item.qty}</span>`;
     ml.appendChild(d);
   });
+  // Pre-populate the hidden order field as soon as modal opens
+  const orderLines = cart.length
+    ? cart.map(item=> item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty).join(' || ')
+    : 'No items added';
+  const orderField = document.getElementById('order-summary');
+  if(orderField) orderField.value = orderLines;
   document.getElementById('mo').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeModal(){ document.getElementById('mo').classList.remove('open'); document.body.style.overflow=''; }
 function submitForm(e){
   e.preventDefault();
-  const form = e.target;
-  const b = form.querySelector('.bs');
+  const b = document.querySelector('#linen-form .bs');
 
-  // Build order summary string
+  // Build order summary string from global cart
   const orderLines = cart.length
     ? cart.map(item=> item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty).join(' || ')
     : 'No items added';
 
-  // Set hidden field value BEFORE creating FormData
+  // Set hidden field
   const orderField = document.getElementById('order-summary');
-  orderField.value = orderLines;
+  if(orderField) orderField.value = orderLines;
 
-  // Now capture the form — order field is already populated
+  // Capture form data
+  const form = document.getElementById('linen-form');
   const data = new FormData(form);
 
-  // Double-check it's in there
+  // Force set the order field on the FormData object directly
   data.set('Linen Order', orderLines);
 
   fetch('https://formspree.io/f/mdavgkyy', {
