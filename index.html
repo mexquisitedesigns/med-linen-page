@@ -15,7 +15,7 @@
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.5}
 
 /* ── HERO ── */
-.hero{background:var(--ink);padding:3.5rem 4rem 3rem;position:relative;overflow:hidden}
+.hero{background:var(--ink);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(201,150,154,.04) 60px,rgba(201,150,154,.04) 61px);pointer-events:none}
 .hero-eye{font-size:10px;letter-spacing:.3em;color:var(--blush);text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;position:relative;z-index:1}
 .hero-eye::before{content:'';width:28px;height:1px;background:var(--blush);display:block}
@@ -33,10 +33,10 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font
 .stat-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 
 /* ── MAIN LAYOUT ── */
-.page-body{display:grid;grid-template-columns:1fr 420px;align-items:start;gap:0}
+.page-body{display:block;width:100%}
 
 /* ── LEFT: FABRIC + COLOR BROWSER ── */
-.left-col{padding:2.5rem 3rem;border-right:1px solid var(--rule)}
+.left-col{padding:2rem 1.5rem;border-right:none}
 
 .sec-eye{font-size:10px;letter-spacing:.22em;color:var(--blush);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
 .sec-eye::before{content:'';width:20px;height:1px;background:var(--blush);display:block}
@@ -75,8 +75,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font
 .sel-color-clear:hover{color:var(--blush-dk)}
 
 /* How it works */
-.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
-.how-item{padding:1.25rem;border:1px solid var(--rule);background:var(--white)}
+.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}.how-item{padding:1.25rem;border:1px solid var(--rule);background:var(--white)}
 .how-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--blush-md);line-height:1;margin-bottom:.5rem}
 .how-t{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .how-b{font-size:12px;color:var(--muted);line-height:1.6}
@@ -87,7 +86,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font
 .term-row::before{content:'·';color:var(--blush);flex-shrink:0;font-size:16px;line-height:1.2}
 
 /* ── RIGHT: ORDER PANEL ── */
-.order-panel{background:var(--white);padding:2rem 1.75rem;position:sticky;top:0;max-height:100vh;overflow-y:auto;border-left:1px solid var(--rule)}
+.order-panel{background:var(--sand);padding:2rem 1.5rem;position:static;max-height:none;border-left:none;border-top:2px solid var(--blush);width:100%}
 .op-head{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:.25rem}
 .op-sub{font-size:12px;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
 
@@ -163,7 +162,7 @@ select.sel:disabled{opacity:.38;cursor:not-allowed}
 .bc{font-size:13px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;text-decoration:underline}
 
 /* ── FOOTER ── */
-.page-footer{background:var(--blush);padding:1.25rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.page-footer{background:var(--blush);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
 .ft-brand{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-style:italic}
 .ft-contact{font-size:11px;letter-spacing:.05em;color:rgba(255,255,255,.75)}
 
@@ -283,7 +282,7 @@ select.sel:disabled{opacity:.38;cursor:not-allowed}
 
     <!-- Step 4: color from left panel -->
     <div class="step-block">
-      <span class="step-lbl">4. Color — browse & select in the color panel ←</span>
+      <span class="step-lbl">4. Color — browse & select in the color panel above ↑</span>
       <div class="panel-color-preview" id="pcp">
         <div class="pcp-dot" id="pcp-dot"></div>
         <span class="pcp-name" id="pcp-name"></span>
