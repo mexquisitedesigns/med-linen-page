@@ -753,9 +753,38 @@ function openModal(){
 function closeModal(){ document.getElementById('mo').classList.remove('open'); document.body.style.overflow=''; }
 function submitForm(e){
   e.preventDefault();
-  const b=e.target.querySelector('.bs');
-  b.textContent='Request sent ✓'; b.style.background='#2D6B50'; b.disabled=true;
-  setTimeout(()=>{ closeModal(); cart=[]; renderCart(); },2500);
+  const form = e.target;
+  const fields = form.querySelectorAll('input,select,textarea');
+  const name  = fields[0]?.value || '';
+  const phone = fields[1]?.value || '';
+  const email = fields[2]?.value || '';
+  const date  = fields[3]?.value || '';
+  const type  = fields[4]?.value || '';
+  const notes = fields[5]?.value || '';
+
+  const orderLines = cart.map(item=>
+    '  - ' + item.fab + ' ' + item.item + ' | ' + item.size + ' | ' + item.color + ' x' + item.qty
+  ).join('%0A');
+
+  const subject = encodeURIComponent('Linen Rental Request - ' + name);
+  const body = 'LINEN RENTAL REQUEST%0A'
+    + '===================%0A'
+    + 'Name: ' + encodeURIComponent(name) + '%0A'
+    + 'Phone: ' + encodeURIComponent(phone) + '%0A'
+    + 'Email: ' + encodeURIComponent(email) + '%0A'
+    + 'Event Date: ' + encodeURIComponent(date) + '%0A'
+    + 'Event Type: ' + encodeURIComponent(type) + '%0A%0A'
+    + 'ORDER:%0A' + orderLines + '%0A%0A'
+    + 'Notes: ' + encodeURIComponent(notes) + '%0A%0A'
+    + 'Submitted via mexquisitedesigns.com%2Flinen';
+
+  window.location.href = 'mailto:info@mexquisitedesigns.com?subject=' + subject + '&body=' + body;
+
+  const b = form.querySelector('.bs');
+  b.textContent = 'Opening email ✓';
+  b.style.background = '#2D6B50';
+  b.disabled = true;
+  setTimeout(()=>{ closeModal(); cart=[]; renderCart(); }, 2000);
 }
 document.getElementById('mo').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
 
