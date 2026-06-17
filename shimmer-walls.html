@@ -3,67 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shimmer Walls – Morel's Exquisite Designs</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:#fdf7f5;font-family:'Montserrat',sans-serif;}
-.sw-section{width:100%;padding:60px 24px 80px;background:#fdf7f5;}
-.sw-header{text-align:center;max-width:520px;margin:0 auto 16px;}
-.sw-eyebrow{display:block;font-size:0.58rem;font-weight:500;letter-spacing:0.38em;text-transform:uppercase;color:#c49a8a;margin-bottom:12px;}
-.sw-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;color:#3a2e2e;line-height:1.1;margin-bottom:12px;}
-.sw-title em{font-style:italic;color:#c97d85;}
-.sw-desc{font-size:0.72rem;font-weight:300;letter-spacing:0.06em;color:#9e8880;line-height:1.9;margin-bottom:24px;}
-.sw-ornament{text-align:center;margin:20px 0 36px;color:#ddc8c0;letter-spacing:12px;}
-.sw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1040px;margin:0 auto 32px;}
-.sw-card{position:relative;height:300px;border-radius:6px;overflow:hidden;cursor:pointer;background:#111;transition:transform 0.25s,box-shadow 0.25s;}
-.sw-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(0,0,0,0.22);}
-.sw-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;display:block;transition:transform 0.4s;}
-.sw-card:hover img{transform:scale(1.05);}
-.sw-card.active{outline:2px solid #c49a8a;outline-offset:3px;}
-.sw-card-label{position:absolute;bottom:0;left:0;right:0;padding:50px 16px 16px;background:linear-gradient(to top,rgba(15,10,10,0.80) 0%,transparent 100%);}
-.sw-card-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:#fff;display:block;margin-bottom:3px;}
-.sw-card-tag{font-size:0.5rem;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
-.sw-detail{max-width:1040px;margin:0 auto 52px;display:none;border-radius:6px;overflow:hidden;box-shadow:0 8px 48px rgba(58,46,46,0.13);}
-.sw-detail.open{display:flex;}
-.sw-detail-img{flex:0 0 52%;position:relative;min-height:380px;background:#111;overflow:hidden;}
-.sw-detail-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;display:block;}
-.sw-detail-info{flex:1;background:#fff;padding:40px 36px;display:flex;flex-direction:column;justify-content:center;}
-.sw-detail-eyebrow{font-size:0.54rem;font-weight:500;letter-spacing:0.34em;text-transform:uppercase;color:#c49a8a;margin-bottom:10px;}
-.sw-detail-title{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:#3a2e2e;line-height:1.15;margin-bottom:14px;}
-.sw-detail-title em{font-style:italic;color:#c97d85;}
-.sw-detail-body{font-size:0.69rem;font-weight:300;letter-spacing:0.05em;color:#9e8880;line-height:1.9;margin-bottom:22px;}
-.sw-specs{margin-bottom:28px;}
-.sw-spec{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0e8e4;}
-.sw-spec-k{font-size:0.57rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#c49a8a;}
-.sw-spec-v{font-size:0.57rem;font-weight:300;color:#7a6a66;}
-.sw-btn{display:inline-block;padding:0.72rem 1.8rem;border:1px solid #c49a8a;color:#c49a8a;font-size:0.6rem;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;text-decoration:none;background:transparent;transition:background 0.3s,color 0.3s;cursor:pointer;font-family:'Montserrat',sans-serif;margin-right:10px;}
-.sw-btn:hover{background:#c49a8a;color:#fff;}
-.sw-close{padding:0.72rem 1.2rem;border:1px solid #e0cdc8;background:transparent;color:#b0988e;font-size:0.6rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;}
-@media(max-width:700px){
-  .sw-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-  .sw-card{height:200px;}
-  .sw-detail.open{flex-direction:column;}
-  .sw-detail-img{flex:none;min-height:220px;}
-  .sw-detail-info{padding:24px 20px;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #f5eeea;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #3a2e2e;
+}
+
+.page-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* "Click Here for Requests" — matches site exactly */
+.sw-toplink {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  color: #3a2e2e;
+  margin-bottom: 28px;
+}
+.sw-toplink a {
+  color: #3a2e2e;
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: normal;
+}
+.sw-toplink a:hover { color: #c49a8a; }
+
+/* PAGE TITLE — matches bold serif "Backdrops" heading */
+.sw-page-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3a2e2e;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 0.01em;
+}
+
+/* 3-COLUMN GRID — matches backdrops page */
+.sw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .sw-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+}
+@media (max-width: 440px) {
+  .sw-grid { grid-template-columns: 1fr; }
+}
+
+/* CARD — matches MED product card exactly */
+.sw-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sw-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #e8ddd8;
+}
+.sw-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+  transition: transform 0.4s;
+}
+.sw-card:hover .sw-card-img-wrap img { transform: scale(1.04); }
+
+/* Product name — matches "8' x 8' Pink Flower Wall" style */
+.sw-card-name {
+  font-family: Georgia, serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #3a2e2e;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+/* Price — matches "Price: $550" style */
+.sw-card-price {
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  color: #3a2e2e;
+  margin-bottom: 6px;
+}
+
+/* Request link — matches lowercase "request" underline style */
+.sw-card-req {
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  color: #3a2e2e;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-style: italic;
+}
+.sw-card-req:hover { color: #c49a8a; }
+
+/* DETAIL PANEL */
+.sw-detail {
+  display: none;
+  background: #fff;
+  border: 1px solid #e0d4cf;
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+.sw-detail.open { display: flex; }
+
+.sw-detail-img {
+  flex: 0 0 42%;
+  position: relative;
+  min-height: 320px;
+  background: #e8ddd8;
+  overflow: hidden;
+}
+.sw-detail-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: left center;
+  display: block;
+}
+
+.sw-detail-info {
+  flex: 1;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f5eeea;
+}
+
+.sw-detail-name {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3a2e2e;
+  margin-bottom: 6px;
+}
+.sw-detail-price {
+  font-family: Georgia, serif;
+  font-size: 0.88rem;
+  color: #3a2e2e;
+  margin-bottom: 14px;
+}
+.sw-detail-desc {
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  color: #7a6a66;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.sw-detail-specs {
+  margin-bottom: 22px;
+  border-top: 1px solid #e0d4cf;
+  padding-top: 14px;
+}
+.sw-spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #ede4e0;
+  font-family: Georgia, serif;
+  font-size: 0.76rem;
+}
+.sw-spec-k { color: #b0988e; font-style: italic; }
+.sw-spec-v { color: #3a2e2e; }
+
+.sw-detail-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.sw-req-link {
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  color: #3a2e2e;
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
+  text-decoration-color: #3a2e2e;
+}
+.sw-req-link:hover { color: #c49a8a; }
+.sw-close-link {
+  font-family: Georgia, serif;
+  font-size: 0.76rem;
+  color: #b0988e;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-style: italic;
+  padding: 0;
+}
+.sw-close-link:hover { color: #7a6a66; }
+
+@media (max-width: 640px) {
+  .sw-detail.open { flex-direction: column; }
+  .sw-detail-img { flex: none; min-height: 220px; }
+  .sw-detail-info { padding: 22px 18px; }
 }
 </style>
 </head>
 <body>
-<div class="sw-section">
+<div class="page-wrap">
 
-  <div class="sw-header">
-    <span class="sw-eyebrow">Add-On Rental</span>
-    <h2 class="sw-title">Shimmer Wall <em>Gallery</em></h2>
-    <p class="sw-desc">Reflective sequin panels that transform any backdrop into a show-stopping moment. Click any style to explore.</p>
-  </div>
-  <div class="sw-ornament">· · ·</div>
+  <!-- Matches "Click Here for Requests" at top of Backdrops page -->
+  <p class="sw-toplink">To add a Shimmer Wall to your event, select it as an add-on when completing your <a href="https://www.mexquisitedesigns.com/contact">Contact Form</a>.</p>
 
-  <div class="sw-grid" id="swGrid"></div>
+  <!-- Matches bold "Backdrops" heading -->
+  <h1 class="sw-page-title">7'x7' Shimmer Walls</h1>
 
+  <!-- Detail panel (opens on click) -->
   <div class="sw-detail" id="swDetail">
     <div class="sw-detail-img"><img id="swDetailImg" src="" alt=""></div>
     <div class="sw-detail-info" id="swDetailInfo"></div>
   </div>
+
+  <!-- 3-col product grid -->
+  <div class="sw-grid" id="swGrid"></div>
 
 </div>
 
@@ -88,53 +258,45 @@ const grid       = document.getElementById('swGrid');
 const detail     = document.getElementById('swDetail');
 const detailImg  = document.getElementById('swDetailImg');
 const detailInfo = document.getElementById('swDetailInfo');
-let activeCard   = null;
 
 WALLS.forEach(wall => {
   const card = document.createElement('div');
   card.className = 'sw-card';
   card.innerHTML = `
-    <img src="${wall.img}" alt="${wall.name}" loading="lazy">
-    <div class="sw-card-label">
-      <span class="sw-card-name">${wall.name}</span>
-      <span class="sw-card-tag">${wall.tag}</span>
-    </div>`;
-  card.addEventListener('click', () => {
-    if (activeCard === card) { closeDetail(); return; }
-    document.querySelectorAll('.sw-card').forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    activeCard = card;
-    openDetail(wall);
-  });
+    <div class="sw-card-img-wrap">
+      <img src="${wall.img}" alt="${wall.name}" loading="lazy">
+    </div>
+    <div class="sw-card-name">${wall.name}</div>
+    <div class="sw-card-price">Price: $310</div>
+`;
+  card.addEventListener('click', () => openDetail(wall));
   grid.appendChild(card);
 });
 
 function openDetail(wall) {
   detailImg.src = wall.img;
   detailImg.alt = wall.name;
+
   const specsHTML = Object.entries(wall.specs).map(([k,v]) =>
-    `<div class="sw-spec"><span class="sw-spec-k">${k}</span><span class="sw-spec-v">${v}</span></div>`
+    `<div class="sw-spec-row"><span class="sw-spec-k">${k}</span><span class="sw-spec-v">${v}</span></div>`
   ).join('');
-  const titleHTML = wall.name.includes('/')
-    ? wall.name.replace('/', '<em>/') + '</em>'
-    : wall.name;
+
   detailInfo.innerHTML = `
-    <div class="sw-detail-eyebrow">Shimmer Wall · ${wall.tag}</div>
-    <div class="sw-detail-title">${titleHTML}</div>
-    <p class="sw-detail-body">${wall.desc}</p>
-    <div class="sw-specs">${specsHTML}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;">
-      <a class="sw-btn" href="https://www.mexquisitedesigns.com/contact?service=Shimmer+Wall&color=${encodeURIComponent(wall.name)}">Request This Style</a>
-      <button class="sw-close" onclick="closeDetail()">Close ✕</button>
+    <div class="sw-detail-name">${wall.name}</div>
+    <div class="sw-detail-price">Price: $310</div>
+    <p class="sw-detail-desc">${wall.desc}</p>
+    <div class="sw-detail-specs">${specsHTML}</div>
+    <div class="sw-detail-actions">
+      <a class="sw-req-link" href="https://www.mexquisitedesigns.com/contact">Add to My Event →</a>
+      <button class="sw-close-link" onclick="closeDetail()">close ✕</button>
     </div>`;
+
   detail.classList.add('open');
-  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeDetail() {
   detail.classList.remove('open');
-  document.querySelectorAll('.sw-card').forEach(c => c.classList.remove('active'));
-  activeCard = null;
 }
 </script>
 </body>
